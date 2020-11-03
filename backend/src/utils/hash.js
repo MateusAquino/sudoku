@@ -1,3 +1,5 @@
+// Generate 6 number hash based on string
+
 module.exports = (str) => {
     str = str.toString()
     str = '0'.repeat(str.length<6?6-str.length:0)+str
@@ -7,7 +9,7 @@ module.exports = (str) => {
     for (let i = 0; i < str.length; i++) // keeps generating hash in 6 chars
         hash[i % 6] = code(hash[i % 6]) ^ code(str[i]);
 
-    for (let i = 0; i < 6; i++) // 
+    for (let i = 0; i < 6; i++) // ensure chars are allowedSymbols
         hash[i] = allowedSymbols[hash[i] % allowedSymbols.length];
 
     return hash.join('');

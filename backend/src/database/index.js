@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/sudoku', { useMongoClient: true });
+mongoose.set('useCreateIndex', true);
+mongoose.connect(process.env.databaseuri, { useNewUrlParser:true, useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
 
 module.exports = mongoose;

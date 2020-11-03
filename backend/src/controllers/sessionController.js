@@ -1,31 +1,48 @@
 const Session = require('../models/Session');
 const Game = require('../sudoku/Game');
 const hash = require('../utils/hash');
-const express = require('express');
-const router = express.Router();
 
-// router.get('/game', async (req, res) => {
-//     const {}
-// });
+class SessionController {
 
-router.post('/game', (req, res) => {
-    try {
-        let { difficulty } = req.body;
-        difficulty = difficulty > 81 ? 81 : (difficulty<0 ? 0 : difficulty);
+    // POST /api/game
+    static async create(difficulty, res) {
+        try {
+            const { gameBoard, userBoard } = Game.newGame(difficulty);
+            
+            let data;
+            do {
+                data = {
+                    code: hash(+new Date), 
+                    gameBoard,
+                    userBoard
+                };
+            } while (await Session.findOne({ code: data.code }));
 
-        const { gameBoard, userBoard } = new Game(difficulty);
-        const sessionPromise = Session.create({
-            code: hash(+new Date), 
+            const session = await Session.create(data);
+
+            res.send({session});
+        } catch (err) {
+            return res.status(400).send({ error: 'Falha na criação da sessão.' })
+        }
+    }
+
+    // GET /api/game
+    static async read(code, res) {
+        const session = await Session.findOne({ code });
+        if (!session) return res.status(404).send({ error: 'Código de sessão inválido ou expirado.' });
+        const { gameBoard, userBoard } = session;
+
+        res.send({
             gameBoard,
             userBoard
         });
-        console.log(sessionPromise)
-        sessionPromise.then(session=>{console.log('b');res.send(session)});
-    } catch (err) {
-        return res.status(400).send({ error: 'Falha na criação da Sessão' })
     }
-});
 
-// router.delete('/game')
 
-module.exports = app => app.use('/api', router);
+    // delete all expired sessions (peer: utils/timer.js)
+    static async removeExpired() {
+        await Session.deleteMany({expires: { $lt: new Date()}})
+    }
+}
+
+module.exports = SessionController;

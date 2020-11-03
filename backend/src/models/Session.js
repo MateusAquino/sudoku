@@ -1,4 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require('../database');
+const { Schema } = require('mongoose');
+
+const expireTimeout = 36 * 60 * 60 * 1000; // 36h de inatividade
 
 const SessionSchema = new mongoose.Schema({
     code: {
@@ -18,17 +21,15 @@ const SessionSchema = new mongoose.Schema({
         default: ".".repeat(81)
     },
 
-    history: {
-        type: [[Number, String]],
-        default: []
-    },
+    history: [Schema.Types.Mixed],
 
     expires: {
         type: Date,
-        default: +new Date() + 24*60*6000
+        default: new Date(+new Date() + expireTimeout)
     }
 });
 
 const Session = mongoose.model('Session', SessionSchema);
+Session.expireTimeout = expireTimeout;
 
 module.exports = Session;

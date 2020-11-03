@@ -1,8 +1,22 @@
 const Board = require('./Board');
 
 class Game {
-    constructor(qnt) {
-        this.gameBoard = new Board(qnt);
+    constructor(qnt=null) {
+        this.gameBoard = new Board(qnt > 81 ? 81 : (qnt < 0 ? 0 : qnt));
+        this.userBoard = new Board();
+        this.history = [];
+    }
+
+    static constructFromData(gameBoard, userBoard, history = []) {
+        const game = new Game();
+        game.gameBoard = new Board(gameBoard);
+        game.userBoard = new Board(userBoard);
+        game.history = history;
+        return game;
+    }
+
+    restart(qnt) {
+        this.gameBoard = new Game(qnt).gameBoard;
         this.userBoard = new Board();
         this.history = [];
     }
@@ -38,12 +52,12 @@ class Game {
     }
 
     setCell(cell, value) {
-        let merge = this.merge();
+        let merge = this.merge().sudoku;
+        if (!this.gameBoard.isPossibleNumber(cell, value==='.'?0:value, merge))
+            throw new Error('Movimento inválido.');
         this.history.push([cell, merge[cell]]);
         this.userBoard.replaceCell(cell, value);
     }
-
-    
 
     merge() {
         let gameBoard = this.gameBoard.toString(),
@@ -54,6 +68,11 @@ class Game {
                       ? userBoard[i]
                       : gameBoard[i];
         return new Board(board.join(''));
+    }
+
+    static newGame(difficulty) {
+        const game = new Game(difficulty);
+        return {game, gameBoard: game.gameBoard.sudoku, userBoard: game.userBoard.sudoku};
     }
 }
 

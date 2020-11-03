@@ -1,5 +1,7 @@
-<img src="./static/sudoku.png" align="center"></img>
-<h1 align="center">Sudoku</h1>
+<h1 align="center">
+    <img src="./static/sudoku.png" align="center"></img>
+    <br/>Sudoku
+</h1>
 <p align="center">Teste técnico <strong>Full Stack</strong> para feedback.</p>
 
 <p align="center">

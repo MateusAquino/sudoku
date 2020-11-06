@@ -2,8 +2,8 @@ require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const routes = require('./routes');
-const timer = require('./utils/timer');
+const routes = require('./src/routes');
+const timer = require('./src/utils/timer');
 
 const app = express();
 

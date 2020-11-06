@@ -1,0 +1,76 @@
+@import './_colors';
+@import './_fonts';
+@import './_typography';
+@import './_mixins';
+
+html {
+    background-color: $background;
+    color: $foreground;
+    margin: 0;
+}
+
+/* Table w/ cells */
+table.sudoku {
+    width: 30vw;
+
+    td {
+        position: relative;
+        margin: 0;
+        text-align: center; 
+        
+        &:after {
+            content: '';
+            display: block;
+            margin-top: 100%;
+        }
+        
+        >.cell {
+            @include no-select;
+            padding-top: calc(0.15vw);
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            
+            &:focus {
+                background: $focus;
+                outline: 0;
+            }
+        }
+
+        &:hover {
+            background: $highlight;
+        }
+    }
+}
+
+/* Sudoku Borders */
+// grid (shadows)
+tr > *:nth-child(n) > * {
+    box-shadow: 1px 0 0 0 $border, 0 1px 0 0 $border;
+    z-index: 5;
+}
+
+// borders - vertical
+td {
+    &:last-child > * {
+        border-right: 2px $foreground solid;
+    }
+    &:nth-of-type(3n+1) > * {
+        border-left: 2px $foreground solid;
+    }
+}
+// borders - horizontal
+tr {
+    &:first-child td > * {
+	    border-top: 2px $foreground solid;
+    }
+    &:nth-child(3n) td > * {
+	    border-bottom: 2px $foreground solid;
+    }
+}
+
+
+/* DEBUG */
+//*{>*{outline: 1px solid pink}}

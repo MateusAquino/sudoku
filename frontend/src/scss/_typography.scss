@@ -1,0 +1,18 @@
+// button {
+//     font-family: 'Droid Sans Bold';
+//     font-size: 14;
+    
+//     :not(.icon) {
+//         font-family: 'Droid Sans';
+//         font-size: 14;
+//     }
+// }
+
+* {
+    font-family: 'Droid Sans Bold';
+}
+
+.cell {
+    font-family: 'Open Sans';
+    font-size: calc(2.1vw);
+}

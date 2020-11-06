@@ -1,0 +1,18 @@
+- row = cell => Math.floor(cell / 9);
+- col = cell => cell % 9;
+- block = cell => Math.floor(row(cell) / 3) * 3 + Math.floor(col(cell) / 3);
+
+- var c = 0, r = 0;
+while c < 9
+  tr
+    while r < 9
+      td
+        - cell = 9*c+r; 
+        - cRow = row(cell); 
+        - cCol = col(cell); 
+        - cBlock = block(cell);
+        - r++; 
+        .cell(tabindex=1 r=cRow c=cCol b=cBlock) #{(cRow*3%9+cCol%3)+1}
+
+  - r = 0;
+  - c++;

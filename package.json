@@ -1,0 +1,30 @@
+{
+  "name": "sudoku",
+  "version": "1.0.0",
+  "description": "Sudoku - Teste técnico para feedback",
+  "scripts": {
+    "devb": "nodemon backend/index.js",
+    "runb": "node backend/index.js",
+    "test": "",
+
+    "devf": "node frontend/dev.js",
+    "runf": "start \"\" \"./frontend/build/index.html\" || xdg-open ./frontend/build/index.html || sensible-browser ./frontend/build/index.html",
+    "build": "node frontend/build.js"
+  },
+  "keywords": [
+    "sudoku",
+    "game"
+  ],
+  "author": "MateusAquino",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6",
+    "node-sass": "^5.0.0",
+    "pug-cli": "^1.0.0-alpha6"
+  }
+}

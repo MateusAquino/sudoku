@@ -11,6 +11,9 @@
   <a aria-label="Versão do Express.js" href="https://expressjs.com/en/changelog/4x.html#4.17.1">
     <img src="https://img.shields.io/badge/express.js-4.17.1-informational?logo=JavaScript"></img>
   </a>
+  <a aria-label="Versão do Sass" href="https://www.npmjs.com/package/node-sass/v/5.0.0">
+    <img src="https://img.shields.io/badge/node--sass-5.0.0-informational?logo=Sass"></img>
+  </a>
   <a aria-label="Desafios" href="#">
   	<img src="https://img.shields.io/badge/desafios-OK-blueviolet"></img>
   </a>
@@ -22,13 +25,17 @@ Falta o Frontend com pug, testes automatizados e estruturar o README.
 ## 🚀 Instalação
 Configure um cluster no MongoDB e coloque a string de conexão em um arquivo `.env`  
 Para instalar as dependências do Servidor (backend), clone o projeto em seu computador e em seguida execute:
-```
-cd backend
+```bash
 yarn install
-yarn dev
+yarn runb
 ```
 
-O Front estará disponível em breve.
+O Front estará disponível em breve, ainda sim ele pode ser compilado utilizando os comandos:
+```bash
+yarn install # caso ainda não tenha utilizado
+yarn build
+yarn runf
+```
 
 ## 📜 Licença
 

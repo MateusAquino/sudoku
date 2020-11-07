@@ -4,13 +4,18 @@ html(lang="pt-br")
 
   head
     title="Sudoku"
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet", href="./css/main.min.css")
+    link(rel="icon" type="image/png" href="./img/sudoku.png")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
 
   body
     h1 Sudoku - Frontend (WIP)
-    table.sudoku(cellspacing="0")
-      tbody
-        include includes/board.pug
+    p Nesse teste, o objetivo foi criar uma aplicação para simular um sudoku, utilizando NodeJS, com o framework Express.js e Pug para a comunicação entre o front e o back.
+    .game
+      table.sudoku(cellspacing="0")
+        tbody
+          include includes/board.pug
+      .sidebar
+        include includes/sidebar.pug
 
     script(src="./js/sudoku.js")

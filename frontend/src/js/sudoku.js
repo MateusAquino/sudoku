@@ -16,7 +16,7 @@
     }
 
     // register events
-    let cells = document.getElementsByClassName('cell');
+    let cells = document.getElementsByClassName('sudoku__cell');
     for (let cell of cells) {
         cell.onblur = () => highlight(-1, -1, -1);
         cell.onfocus = () => click(cell)

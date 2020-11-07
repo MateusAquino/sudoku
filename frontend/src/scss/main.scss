@@ -1,7 +1,10 @@
 @import './_colors';
+@import './_mixins';
 @import './_fonts';
 @import './_typography';
-@import './_mixins';
+
+@import './components/_board';
+@import './components/_sidebar';
 
 html {
     background-color: $background;
@@ -9,68 +12,35 @@ html {
     margin: 0;
 }
 
-/* Table w/ cells */
-table.sudoku {
-    width: 30vw;
-
-    td {
-        position: relative;
-        margin: 0;
-        text-align: center; 
-        
-        &:after {
-            content: '';
-            display: block;
-            margin-top: 100%;
-        }
-        
-        >.cell {
-            @include no-select;
-            padding-top: calc(0.15vw);
-            position: absolute;
-            top: 0px;
-            bottom: 0px;
-            left: 0px;
-            right: 0px;
-            
-            &:focus {
-                background: $focus;
-                outline: 0;
-            }
-        }
-
-        &:hover {
-            background: $highlight;
-        }
-    }
+h1, p {
+    margin-right: 25px;
+    margin-left: 25px;
 }
 
-/* Sudoku Borders */
-// grid (shadows)
-tr > *:nth-child(n) > * {
-    box-shadow: 1px 0 0 0 $border, 0 1px 0 0 $border;
-    z-index: 5;
+body {
+    max-width: 600px;
+    margin: auto;
 }
 
-// borders - vertical
-td {
-    &:last-child > * {
-        border-right: 2px $foreground solid;
-    }
-    &:nth-of-type(3n+1) > * {
-        border-left: 2px $foreground solid;
-    }
-}
-// borders - horizontal
-tr {
-    &:first-child td > * {
-	    border-top: 2px $foreground solid;
-    }
-    &:nth-child(3n) td > * {
-	    border-bottom: 2px $foreground solid;
-    }
+.game {
+    display: flex;
+    flex-wrap: wrap;
+    @include mobile() { margin: 0 50px 0 50px; }
 }
 
+.button {
+    background-color: $theme;
+    border: none;
+    color: white;
+    text-align: center;
+    display: inline-block;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.sidebar_cells {
+    width:90%;
+}
 
 /* DEBUG */
-//*{>*{outline: 1px solid pink}}
+*{>*{outline: 1px solid pink}}

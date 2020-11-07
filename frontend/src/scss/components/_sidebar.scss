@@ -1,0 +1,41 @@
+.sidebar { 
+    @include no-select;
+    @include mobile()  { margin-top: 20px; width: 100% }
+    @include desktop() {margin-left: 30px; }
+    width: 185px;
+    display: flex;
+    flex-wrap: wrap;
+
+    > * { flex-grow: 1; }
+
+    &__button {
+        height: 50px;
+        width: 100%;
+        @include mobile() { margin-bottom: 20px; }
+    }
+
+    &__cellbutton {
+        border: 1px $border solid;
+        width: 31%;
+        margin: -1px 0 0 -1px;
+        padding-top: 5px;
+        text-align: center;
+
+        &:hover  { background-color: $highlight; }
+        &:active { background-color: $focus; }
+    }
+
+    &__celliconbutton {
+        border: 1px $border solid;
+        width: 48%;
+        margin: -1px 0 0 -1px;
+        align-content: center;
+        text-align: center;
+        display: inline-block;
+    }
+
+    #notes {@include clickableIcon('pen');}
+    #hint  {@include clickableIcon('lamp');}
+    #undo  {@include clickableIcon('undo');}
+    #erase {@include clickableIcon('eraser');}
+}

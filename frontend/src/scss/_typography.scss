@@ -1,18 +1,24 @@
-// button {
-//     font-family: 'Droid Sans Bold';
-//     font-size: 14;
-    
-//     :not(.icon) {
-//         font-family: 'Droid Sans';
-//         font-size: 14;
-//     }
-// }
+html { font-family: 'Aileron Light'; }
 
-* {
+// sidebar
+button { 
     font-family: 'Droid Sans Bold';
 }
 
-.cell {
-    font-family: 'Open Sans';
-    font-size: calc(2.1vw);
+.sidebar { 
+    font-size: 0;
+    > * { font-size: 12.5px; }
+    &__button { 
+        @include desktop() { font-size: 15px; }
+        @include mobile() { font-size: calc(0.5rem + 2.5vw); }
+    }
+    &__cellbutton { font-size: 38px; font-family: 'Aileron Light'; }
+    &__celliconbutton { font-family: 'Droid Sans Bold'; }
+}
+
+// sudoku
+td {
+    font-family: 'Aileron Light';
+    @include desktop() { font-size: 27px; } 
+    @include mobile()  { font-size: calc(6vw - 0.2rem); }
 }

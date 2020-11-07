@@ -1,3 +1,4 @@
+/* Utils */
 @mixin no-select {
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */
@@ -6,4 +7,38 @@
           -ms-user-select: none; /* Internet Explorer/Edge */
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
-  }
+}
+
+@mixin pseudoIcon($name, $color) {
+	&:before {
+    	content: '';
+    	background: url('../../img/' + $name + '.png');
+    	background-size: cover;
+    	width: 35px;
+		height: 35px;
+		margin-top: 9px;
+		margin-left: calc(50% - 17.5px);
+		margin-bottom: 4px;
+		display: block;
+	}
+	background-color: $color;
+}
+
+@mixin clickableIcon($name) {
+	@include pseudoIcon($name + "_off", $background); 
+  	&:hover  { @include pseudoIcon($name + "_hover", $highlight); }
+  	&:active { @include pseudoIcon($name + "_on", $theme); }
+}
+
+/* Responsive  Mixins */
+@mixin mobile() {
+    @media only screen and (max-width: 600px) {
+        @content;
+    }
+}
+
+@mixin desktop() {
+    @media only screen and (min-width: 600px) {
+        @content;
+    }
+}

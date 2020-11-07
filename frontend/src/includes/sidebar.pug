@@ -1,0 +1,8 @@
+button.button.sidebar__button="Novo Jogo"
+
+- n = 1;
+while n < 10
+  .sidebar__cellbutton(id="n"+n)=n++
+
+each val, key in {notes: "Notas", hint: "Dica", undo: "Anular", erase: "Apagar"}
+  .sidebar__celliconbutton(id=key)=val

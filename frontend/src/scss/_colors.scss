@@ -7,13 +7,3 @@ $theme: #2A92E9;
 $highlight: #E1E7EE;
 $border: #CFD6E1;
 $focus: #B2DFFE;
-
-// exports (to js)
-:export{
-    background: $background;
-    foreground: $foreground;
-    theme: $theme;
-    highlight: $highlight;
-    border: $border;
-    focus : $focus;
-}

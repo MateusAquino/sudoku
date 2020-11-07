@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="./static/sudoku.png" align="center"></img>
+    <img src="./frontend/src/img/sudoku.png" align="center"></img>
     <br/>Sudoku
 </h1>
 <p align="center">Teste técnico <strong>Full Stack</strong> para feedback.</p>
@@ -30,7 +30,7 @@ yarn install
 yarn runb
 ```
 
-O Front estará disponível em breve, ainda sim ele pode ser compilado utilizando os comandos:
+O Front **estará** disponível em breve, ainda sim ele pode ser compilado utilizando os comandos:
 ```bash
 yarn install # caso ainda não tenha utilizado
 yarn build

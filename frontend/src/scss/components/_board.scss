@@ -1,0 +1,64 @@
+/* Table w/ cells */
+.sudoku {
+    @include desktop() { width: 385px; }
+    @include mobile()  { width: calc(100% - 100px); flex-grow: 1; }
+
+    td {
+        position: relative;
+        margin: 0;
+        text-align: center; 
+        
+        // separate rows (relative pos)
+        &:after {
+            content: '';
+            display: block;
+            margin-top: 100%;
+        }
+
+        &:hover {
+            background: $highlight;
+        }
+    }
+
+    &__cell {
+        @include no-select;
+        @include desktop() { padding-top: 3.5px; }
+        @include mobile()  { padding-top: calc(0.32vw);}
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        
+        &:focus {
+            background: $focus;
+            outline: 0;
+        }
+    }
+}
+
+/* Sudoku Borders */
+// grid (shadows)
+tr > *:nth-child(n) > * {
+    box-shadow: 1px 0 0 0 $border, 0 1px 0 0 $border;
+    z-index: 5;
+}
+
+// borders - vertical
+td {
+    &:last-child > * {
+        border-right: 2px $foreground solid;
+    }
+    &:nth-of-type(3n+1) > * {
+        border-left: 2px $foreground solid;
+    }
+}
+// borders - horizontal
+tr {
+    &:first-child td > * {
+	    border-top: 2px $foreground solid;
+    }
+    &:nth-child(3n) td > * {
+	    border-bottom: 2px $foreground solid;
+    }
+}

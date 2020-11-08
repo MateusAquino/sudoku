@@ -41,7 +41,7 @@ yarn runf # ou 'yarn host --open' caso queira colocá-lo na porta 80
 <h1 align="center">
     <img src="./responsiveness.webp" align="center"></img>
 </h1>
-O live-preview deste app pode ser encontrado clicando [aqui](https://feedback-sudoku.herokuapp.com).
+<p>O live-preview deste app pode ser encontrado clicando <a aria-label="Live Preview" href="https://feedback-sudoku.herokuapp.com/">aqui</a>.</p>
 
 ## 🏆 Desafios
 - [x] Botão de Anular

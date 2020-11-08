@@ -13,6 +13,9 @@ if (args && args.includes('--auto-compile')) {
 if (args && args.includes('--open')) {
     setTimeout(()=>exec('explorer \"http://localhost:80\" || xdg-open \"http://localhost:80\" || open \"http://localhost:80\"'), 2000);
 }
+if (args && args.includes('--with-backend')) {
+    setTimeout(()=>require('../backend/index'), 100);
+}
 
 const express = require('express');
 const app = express();

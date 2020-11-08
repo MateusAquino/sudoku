@@ -9,8 +9,10 @@
     "devf": "node frontend/dev.js --auto-compile --open",
     "runf": "start \"\" \"./frontend/build/index.html\" || xdg-open ./frontend/build/index.html || sensible-browser ./frontend/build/index.html",
     "host": "node frontend/dev.js",
-    "build": "node frontend/build.js"
+    "build": "node frontend/build.js",
+    "start": "node frontend/dev.js --with-backend"
   },
+  "heroku-run-build-script": true,
   "keywords": [
     "sudoku",
     "game"

@@ -5,9 +5,10 @@
   "scripts": {
     "devb": "nodemon backend/index.js",
     "runb": "node backend/index.js",
-    "test": "",
-    "devf": "node frontend/dev.js",
+    "test": "jest",
+    "devf": "node frontend/dev.js --auto-compile --open",
     "runf": "start \"\" \"./frontend/build/index.html\" || xdg-open ./frontend/build/index.html || sensible-browser ./frontend/build/index.html",
+    "host": "node frontend/dev.js",
     "build": "node frontend/build.js"
   },
   "keywords": [
@@ -23,8 +24,9 @@
     "mongoose": "^5.10.11"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6",
+    "jest": "^26.6.3",
     "node-sass": "^5.0.0",
+    "nodemon": "^2.0.6",
     "pug-cli": "^1.0.0-alpha6"
   }
 }

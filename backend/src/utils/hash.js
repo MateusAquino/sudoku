@@ -1,6 +1,7 @@
 // Generate 6 number hash based on string
 
 module.exports = str => {
+    if (typeof str === 'object' && str.getTime) str = str.getTime();
     str = str.toString()
     str = '0'.repeat(str.length<6?6-str.length:0)+str
     var allowedSymbols = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";

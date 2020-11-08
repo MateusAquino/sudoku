@@ -14,16 +14,16 @@
   <a aria-label="Versão do Sass" href="https://www.npmjs.com/package/node-sass/v/5.0.0">
     <img src="https://img.shields.io/badge/node--sass-5.0.0-informational?logo=Sass"></img>
   </a>
-  <a aria-label="Desafios" href="#">
+  <a aria-label="Build Status" href="https://travis-ci.org/MateusAquino/sudoku">
+    <img src="https://travis-ci.org/MateusAquino/sudoku.svg?branch=master"></img>
+  </a>
+  <a aria-label="Desafios" href="#-desafios">
   	<img src="https://img.shields.io/badge/desafios-OK-blueviolet"></img>
   </a>
 </p>
 
-**Aviso**: Este projeto ainda está em desenvolvimento.  
-Faltam testes automatizados e refatorar o frontend (`sudoku.js`).
-
 ## 🚀 Instalação
-Configure um cluster no MongoDB e coloque a string de conexão em um arquivo `.env`  
+Configure um cluster no MongoDB e coloque a **string de conexão** em um arquivo `.env` com o nome `databaseuri`.  
 Para instalar as dependências do Servidor (backend), clone o projeto em seu computador e em seguida execute:
 ```bash
 yarn install
@@ -34,12 +34,18 @@ Para compilar e executar o Website (frontend) utilize os comandos abaixo:
 ```bash
 yarn install # caso ainda não tenha utilizado
 yarn build
-yarn runf
+yarn runf # ou 'yarn host --open' caso queira colocá-lo na porta 80
 ```
+
+## 💻 Preview
+<h1 align="center">
+    <img src="./responsiveness.webp" align="center"></img>
+</h1>
+O live-preview deste app pode ser encontrado clicando [aqui](https://feedback-sudoku.herokuapp.com).
 
 ## 🏆 Desafios
 - [x] Botão de Anular
-- [ ] Botão de Notas (desafio pessoal - wip)
+- [x] Botão de Notas (desafio pessoal)
 - [x] Botão de Dica (desafio pessoal)
 - [x] Continuar jogo em outros dispositivos (desafio pessoal)
 

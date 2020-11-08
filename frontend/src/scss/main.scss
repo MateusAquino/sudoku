@@ -21,6 +21,7 @@ h1, p {
 body {
     max-width: 600px;
     margin: auto;
+    @include desktop() { margin-top: 80px; margin-bottom: 80px; }
 }
 
 .game {

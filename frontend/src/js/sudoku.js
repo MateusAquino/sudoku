@@ -3,6 +3,10 @@
         registerEvents();
 
         let game = await req('GET', '/game', `code=${await code()}`);
+        if (game.error && game.error.includes('inválido ou expirado')) {
+            $('strong#code').innerText = await newSession();
+            game = await req('GET', '/game', `code=${await code()}`);
+        }
         updateBoard(...Object.values(game));
     }
 
@@ -17,6 +21,7 @@
     newSession = async () => {
         let res = await req('POST', '/game', 'difficulty=0');
         setCode(res.session.code);
+        setTimeout(()=>setModalVisibility(true), 0);
         return res.session.code;
     }
 
@@ -32,9 +37,18 @@
         }
     }
 
+    let notesEnabled = false;
+    toggleNotes = () => {
+        notesEnabled = $('.sudoku').classList.toggle('sudoku--notas');
+        $('#notes').classList.toggle('badge--on')
+    }
+
     /* ------ EVENTS ------ */
+
     let selectedCell = null;
     registerEvents = () => {
+        
+        // Board - Cell click
         for (let cell of cells) {
             cell.onblur  = () => highlight(-1, -1, -1);
             cell.onfocus = () => click(selectedCell = cell);
@@ -43,6 +57,7 @@
         // Sidebar - Cell click
         $('.sidebar__cellbutton').forEach(btn => btn.onclick = async () => {
             if (!selectedCell) return;
+            if (notesEnabled) return selectedCell.setAttribute('note', btn.innerText.trim());
             const cell = parseInt(selectedCell.getAttribute('cell'));
             let x = await req('PUT', '/define', `code=${await code()}&cell=${cell}&value=${btn.innerText.trim()}`);
             if (x.error) {
@@ -55,9 +70,11 @@
 
         // Sidebar - Buttons
         $('#newGame').onclick = () => setModalVisibility(true);
+        $('#notes').onclick = () => toggleNotes();
         $('#hint').onclick = async ()  => req('GET', '/hint', `code=${await code()}`);
         $('#undo').onclick = async ()  => req('PUT', '/undo', `code=${await code()}`);
-        $('#erase').onclick = async () => req('PUT', '/delete', `code=${await code()}&cell=${selectedCell.getAttribute('cell')}`);
+        $('#erase').onclick = async () => notesEnabled ? selectedCell.setAttribute('note', '') 
+                                        : req('PUT', '/delete', `code=${await code()}&cell=${selectedCell.getAttribute('cell')}`);
 
         // Modal Buttons
         restart = async difficulty => { await req('PUT', '/restart', `code=${await code()}&difficulty=${difficulty}`); return false; };
@@ -73,6 +90,7 @@
     }
 
     /* ------ BOARD FUNCTIONS ------ */
+
     updateBoard = async (gameBoard, userBoard) => {
         let emptyCells = 0;
         for (const cell in gameBoard) (async () => {
@@ -84,7 +102,7 @@
                 cellObj.innerText = userBoard[cell]
                 addClass(cellObj, 'sudoku__cell--spotlight');  
             } else {
-                cellObj.innerText = '';
+                cellObj.innerText = '   ';
                 emptyCells++;
             }
         })();
@@ -92,6 +110,7 @@
     }
 
     /* ------  CELL FUNCTIONS ------ */
+
     addClass = (DOM, className) => {
         if ((DOM && !DOM.classList.contains(className)) || (DOM && !DOM.classList))
             DOM.classList.add(className)
@@ -132,13 +151,13 @@
     }
 
     /* ------ UTILS ------ */
+
     $ = query => {
         let elements = document.querySelectorAll(query);
         return elements.length===1 ? elements[0] : elements;
     }
 
     req = (method, endpoint, params) => {
-        console.log(method, endpoint, params)
         return new Promise(resolve => {
             let xhr = new XMLHttpRequest();
             xhr.open(method, baseURL + endpoint + (method==='GET'?`?${params}`:''));
@@ -155,6 +174,8 @@
             xhr.send(params);
         });
     }
+
+    /* ----- CODE ----- */
 
     setCode = value => {
         let date = new Date(new Date().getTime() + (18*24*600000)); // 3 dias
@@ -179,6 +200,8 @@
         else return $('strong#code').innerText = await newSession();
     }
 
+    /* ----- MODAL ----- */
+
     defaultMessage = $('#popup-text').innerHTML;
     defaultInfo = $('#popup-info').innerHTML;
     setModalVisibility = (show, message = '', info = '') => {
@@ -198,7 +221,8 @@
         }
     }
 
-    // env vars
+    /* ----- ENV VARS ----- */
+    
     const backendPort = 3000;
     const cells = $('.sudoku__cell');
     let baseURL = window.location.href;

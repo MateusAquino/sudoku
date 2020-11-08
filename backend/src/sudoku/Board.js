@@ -196,7 +196,6 @@ class Board {
 		while(steps-->0) {
 			if (!unsolved.toString().includes('.')) return false;
 			let cell = cells.next();
-			if (!cell) continue;
 			let pos = unsolvedPos[cell.value];
 			unsolved = this.replaceCell(pos, solved[pos], unsolved);
 		}
@@ -205,7 +204,7 @@ class Board {
 	}
 
 	solve(sudoku) {
-		if (!sudoku) sudoku = this.sudoku;
+		if (sudoku===undefined) sudoku = this.sudoku;
 		if (typeof sudoku === "string") sudoku = this.toArray(sudoku);
 		let saved = new Array();
 		let savedSudoku = new Array();

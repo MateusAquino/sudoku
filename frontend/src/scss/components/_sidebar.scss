@@ -32,10 +32,13 @@
         display: inline-block;
     }
 
-    #notes {@include clickableIcon('pen');}
     #hint  {@include clickableIcon('lamp');}
     #undo  {@include clickableIcon('undo');}
     #erase {@include clickableIcon('eraser');}
+    #notes {
+        @include clickableIcon('pen');
+        @include enableBadge;
+    }
 
     @include mobile() { #newGame { margin-top: 20px; order: 2; } }
 

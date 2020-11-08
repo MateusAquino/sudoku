@@ -9,7 +9,7 @@
         text-align: center; 
         
         // separate rows (relative pos)
-        &:after {
+        &::after {
             content: '';
             display: block;
             margin-top: 100%;
@@ -56,5 +56,39 @@ tr {
     }
     &:nth-child(3n) td > * {
 	    border-bottom: 2px $foreground solid;
+    }
+}
+
+/* Sudoku Notes */
+.sudoku .sudoku__cell::before {
+    position: absolute;
+    margin-top: -1px;
+    align-items: center;
+    color: $note;
+    content: attr(note);
+    @include desktop() { margin-left: -8px; }
+    @include mobile()  { 
+        margin-top: 1px;
+        margin-left: calc(5px - 3vw); 
+    }
+}
+
+.sudoku--notas {
+    td .sudoku__cell {
+        @include desktop() { 
+            padding-right: 26px; 
+            &::before {
+                margin-top: 0px;
+                margin-left: 8px;
+            }
+        }
+        @include mobile()  {
+            padding-right: calc(10px + 2vw); 
+            padding-top: calc(1vw);
+            &::before {
+                margin-top: 0px;
+                margin-left: calc(2vw - 1px);
+            }
+        }
     }
 }

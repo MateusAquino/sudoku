@@ -6,7 +6,7 @@ class GameController {
     // POST /api/restart
     static async restart(code, difficulty, res) {
         this.consume(code, res, (game, update) => {
-            game.restart(difficulty);
+            game.restart(parseInt(difficulty));
             update();
         });
     }
@@ -22,7 +22,7 @@ class GameController {
     // PUT /api/define
     static async define(code, cell, value, res) {
         this.consume(code, res, (game, update) => {
-            game.setCell(cell, value);
+            game.setCell(parseInt(cell), parseInt(value));
             update();
         });
     }
@@ -30,7 +30,7 @@ class GameController {
     // PUT /api/delete
     static async delete(code, cell, res) {
         this.consume(code, res, (game, update) => {
-            game.delete(cell);
+            game.delete(parseInt(cell));
             update();
         });
     }
@@ -84,7 +84,10 @@ class GameController {
                 }
             );
         } catch (err) {
-            res.status(400).send({ error: 'Falha ao realizar ação, parâmetros inválidos.' });
+            if (err.message.includes('Movimento inválido.'))
+                res.status(400).send({ error: err.message });
+            else
+                res.status(400).send({ error: 'Falha ao realizar ação, parâmetros inválidos.' });
         }
     }
 }

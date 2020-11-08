@@ -1,8 +1,10 @@
-button.button.sidebar__button="Novo Jogo"
+button.button.sidebar__button#newGame="Novo Jogo"
 
 - n = 1;
-while n < 10
-  .sidebar__cellbutton(id="n"+n)=n++
+.sidebar__cells
+  while n < 10
+    .sidebar__cellbutton=n++
 
-each val, key in {notes: "Notas", hint: "Dica", undo: "Anular", erase: "Apagar"}
-  .sidebar__celliconbutton(id=key)=val
+.sidebar__icons
+  each val, key in {notes: "Notas", hint: "Dica", undo: "Anular", erase: "Apagar"}
+    .sidebar__celliconbutton(id=key)=val

@@ -14,26 +14,22 @@
             display: block;
             margin-top: 100%;
         }
-
-        &:hover {
-            background: $highlight;
-        }
     }
 
     &__cell {
         @include no-select;
         @include desktop() { padding-top: 3.5px; }
-        @include mobile()  { padding-top: calc(0.32vw);}
+        @include mobile()  { padding-top: 1vw; }
         position: absolute;
         top: 0px;
         bottom: 0px;
         left: 0px;
         right: 0px;
-        
-        &:focus {
-            background: $focus;
-            outline: 0;
-        }
+        @include animation;
+        &:focus      { outline: 0; }
+        &--focus     { background-color: $focus; }
+        &--invalid   { background-color: $invalid; }
+        &--spotlight { color: $theme; }
     }
 }
 

@@ -12,7 +12,7 @@ while c < 9
         - cCol = col(cell); 
         - cBlock = block(cell);
         - r++; 
-        .sudoku__cell(tabindex=1 r=cRow c=cCol b=cBlock) #{(cRow*3%9+cCol%3)+1}
+        .sudoku__cell(tabindex=1 r=cRow c=cCol b=cBlock, cell=cRow*9+cCol)
 
   - r = 0;
   - c++;

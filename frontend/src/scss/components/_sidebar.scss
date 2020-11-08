@@ -1,12 +1,10 @@
 .sidebar { 
     @include no-select;
-    @include mobile()  { margin-top: 20px; width: 100% }
-    @include desktop() {margin-left: 30px; }
+    @include mobile()  { margin-top: 20px; margin-bottom: 20px; width: 100%; }
+    @include desktop() { margin-left: 30px; }
     width: 185px;
     display: flex;
     flex-wrap: wrap;
-
-    > * { flex-grow: 1; }
 
     &__button {
         height: 50px;
@@ -18,8 +16,8 @@
         border: 1px $border solid;
         width: 31%;
         margin: -1px 0 0 -1px;
-        padding-top: 5px;
         text-align: center;
+        @include desktop() { padding-top: 5px; }
 
         &:hover  { background-color: $highlight; }
         &:active { background-color: $focus; }
@@ -38,4 +36,17 @@
     #hint  {@include clickableIcon('lamp');}
     #undo  {@include clickableIcon('undo');}
     #erase {@include clickableIcon('eraser');}
+
+    @include mobile() { #newGame { margin-top: 20px; order: 2; } }
+
+    /* Responsiveness */
+    &__cells, &__icons {
+        display: flex;
+        flex-wrap: wrap;
+        @include mobile() {
+            width: 49%;
+        }
+    }
+    > * { flex-grow: 1; }
+    > * > * { flex-grow: 1; }
 }

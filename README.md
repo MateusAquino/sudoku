@@ -20,7 +20,7 @@
 </p>
 
 **Aviso**: Este projeto ainda está em desenvolvimento.  
-Falta o Frontend com pug, testes automatizados e estruturar o README.
+Faltam testes automatizados e refatorar o frontend (`sudoku.js`).
 
 ## 🚀 Instalação
 Configure um cluster no MongoDB e coloque a string de conexão em um arquivo `.env`  
@@ -30,12 +30,18 @@ yarn install
 yarn runb
 ```
 
-O Front **estará** disponível em breve, ainda sim ele pode ser compilado utilizando os comandos:
+Para compilar e executar o Website (frontend) utilize os comandos abaixo:
 ```bash
 yarn install # caso ainda não tenha utilizado
 yarn build
 yarn runf
 ```
+
+## 🏆 Desafios
+- [x] Botão de Anular
+- [ ] Botão de Notas (desafio pessoal - wip)
+- [x] Botão de Dica (desafio pessoal)
+- [x] Continuar jogo em outros dispositivos (desafio pessoal)
 
 ## 📜 Licença
 

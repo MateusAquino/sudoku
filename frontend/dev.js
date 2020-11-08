@@ -7,5 +7,5 @@ function spawn(cmd, prefix) {
 
 spawn('pug -w ./frontend/src -o ./frontend/src/html -P', 'Pug');
 spawn('node-sass -w --output-style compressed ./frontend/src/scss/main.scss ./frontend/src/css/main.min.css', 'Sass');
-spawn('nodemon ./frontend/devserver.js');
+spawn('node ./frontend/devserver.js');
 exec('explorer \"http://localhost:80\" || xdg-open \"http://localhost:80\" || open \"http://localhost:80\"');

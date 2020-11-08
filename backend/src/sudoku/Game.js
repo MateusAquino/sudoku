@@ -1,4 +1,5 @@
 const Board = require('./Board');
+const diffStringsIndex = require('../utils/diffStringsIndex');
 
 class Game {
     constructor(qnt=null) {
@@ -24,19 +25,21 @@ class Game {
     hint() {
         let hint = this.merge().solveNext(1),
             userBoard = this.userBoard.toString(),
-            board = this.gameBoard.toArray(),
-            oldHint = null;
-        if (hint) return (this.gameBoard = new Board(hint)).toString();
-
+            board = this.gameBoard.toArray();
+        if (!this.merge().toString().includes('.')) return false;
+        
+        if (hint) {
+            let withHint = this.merge(),
+                withHintIndex = diffStringsIndex(hint, withHint.toString());
+            this.gameBoard.replaceCell(withHintIndex, hint[withHintIndex])
+            return this.gameBoard.toString();
+        }
         for (const i in userBoard) {
-            board[i] = userBoard;
+            board[i] = board[i]==='0' ? userBoard[i] : board[i];
             let newHint = new Board(board.join(''));
-            if (newHint.solve())
-                oldHint = newHint;
-            else {
-                if (oldHint)
-                    return (this.gameBoard = oldHint).toString();
-                return this.gameBoard.solveNext(1);
+            if (!newHint.solve()) {
+                this.userBoard.replaceCell(i, '.')
+                return this.gameBoard.toString();
             }
         }
     }
@@ -53,10 +56,13 @@ class Game {
 
     setCell(cell, value) {
         let merge = this.merge().sudoku;
-        if (!this.gameBoard.isPossibleNumber(cell, value==='.'?0:value, merge))
-            throw new Error('Movimento inválido.');
-        this.history.push([cell, merge[cell]]);
+        let condition = this.gameBoard.isPossibleNumber(cell, value==='.'?0:value, merge);
+        if (condition.length !== 3)
+            throw new Error('Movimento inválido. !['+condition+']');
+        if (this.userBoard.toString()[cell] != value)
+            this.history.push([cell, merge[cell]]);
         this.userBoard.replaceCell(cell, value);
+        return this;
     }
 
     merge() {

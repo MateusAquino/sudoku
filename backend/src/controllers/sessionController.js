@@ -7,7 +7,7 @@ class SessionController {
     // POST /api/game
     static async create(difficulty, res) {
         try {
-            const { gameBoard, userBoard } = Game.newGame(difficulty);
+            const { gameBoard, userBoard } = Game.newGame(parseInt(difficulty));
             
             let data;
             do {

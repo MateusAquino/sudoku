@@ -4,6 +4,7 @@
 @import './_typography';
 
 @import './components/_board';
+@import './components/_modal';
 @import './components/_sidebar';
 
 html {
@@ -36,11 +37,11 @@ body {
     display: inline-block;
     border-radius: 8px;
     cursor: pointer;
-}
-
-.sidebar_cells {
-    width:90%;
+    
+    &:focus {
+        outline: none;
+    }
 }
 
 /* DEBUG */
-*{>*{outline: 1px solid pink}}
+//*{>*{outline: 1px solid pink}}

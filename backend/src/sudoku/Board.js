@@ -50,15 +50,15 @@ class Board {
 	// given a number, a row and a sudoku, returns true if the number can be placed in the row
 	isPossibleRow(number, row, sudoku) {
 		for (let i = 0; i <= 8; i++)
-			if (sudoku[row * 9 + i] == number) return false;
-		return true;
+			if (sudoku[row * 9 + i] == number) return '';
+		return 'row';
 	}
 
 	// given a number, a column and a sudoku, returns true if the number can be placed in the column
 	isPossibleCol(number, col, sudoku) {
 		for (let i = 0; i <= 8; i++)
-			if (sudoku[col + 9 * i] == number) return false;
-		return true;
+			if (sudoku[col + 9 * i] == number) return '';
+		return 'col';
 	}
 
 	// given a number, a 3x3 block and a sudoku, returns true if the number can be placed in the block
@@ -72,8 +72,8 @@ class Board {
 						3 * (block % 3)
 				] == number
 			)
-				return false;
-		return true;
+				return '';
+		return 'block';
 	}
 
 	// given a cell, a number and a sudoku, returns true if the number can be placed in the cell
@@ -81,11 +81,11 @@ class Board {
 		let row = this.returnRow(cell);
 		let col = this.returnCol(cell);
 		let block = this.returnBlock(cell);
-		return (
-			this.isPossibleRow(number, row, sudoku) &&
-			this.isPossibleCol(number, col, sudoku) &&
-			this.isPossibleBlock(number, block, sudoku)
-		);
+		let condition = [];
+		condition.push(this.isPossibleRow(number, row, sudoku));
+		condition.push(this.isPossibleCol(number, col, sudoku));
+		condition.push(this.isPossibleBlock(number, block, sudoku));
+		return condition.filter(x=>x);
 	}
 
 	// given a row and a sudoku, returns true if it's a legal row
@@ -138,7 +138,7 @@ class Board {
 	determinePossibleValues(cell, sudoku) {
 		let possible = new Array();
 		for (let i = 1; i <= 9; i++)
-			if (this.isPossibleNumber(cell, i, sudoku)) possible.unshift(i);
+			if (this.isPossibleNumber(cell, i, sudoku).length===3) possible.unshift(i);
 		return possible;
 	}
 
@@ -194,6 +194,7 @@ class Board {
 		let qnt = unsolvedPos.length;
 		let cells = this.randomOrder(qnt);
 		while(steps-->0) {
+			if (!unsolved.toString().includes('.')) return false;
 			let cell = cells.next();
 			if (!cell) continue;
 			let pos = unsolvedPos[cell.value];
@@ -208,12 +209,10 @@ class Board {
 		if (typeof sudoku === "string") sudoku = this.toArray(sudoku);
 		let saved = new Array();
 		let savedSudoku = new Array();
-		let i = 0;
 		let nextMove;
 		let whatToTry;
 		let attempt;
 		while (!this.isSolvedSudoku(sudoku)) {
-			i++;
 			nextMove = this.scanSudokuForUnique(sudoku);
 			if (nextMove == false) {
 				nextMove = saved.pop();

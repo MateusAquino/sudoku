@@ -1,0 +1,19 @@
+.modal
+  .modal__content
+    span#close !{'&times;'}
+    h3 
+      span#popup-text Novo Jogo 
+      button.button#enter !{'&rArr; Continuar'} 
+    p#popup-info O código da sua sessão atual é 
+      strong#code="XXXXXX"
+      | ! 
+      br
+      | Escolha uma dificuldade:
+    center#popup-buttons
+      each val, key in {easy: "Super Fácil", mehh: "Fácil", norm: "Médio", ouch: "Difícil", hard: "Desumano"}
+        button.button(id=key)=val
+    center#popup-entercode
+      input#codeinput(placeholder='Código' maxlength=6)
+      button.button#codejoin Continuar
+    
+    

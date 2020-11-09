@@ -6,21 +6,22 @@ function spawn(cmd, prefix) {
 }
 
 const args = process.argv;
-if (args && args.includes('--auto-compile')) {
+const argsOpen = args && args.includes('--open');
+const autoCompile = args && args.includes('--auto-compile');
+const withBackend = args && args.includes('--with-backend');
+const location = args && args.includes('--from-src') ? 'src/' : 'build/';
+
+if (autoCompile) {
     spawn('pug -w ./frontend/src -o ./frontend/src/html -P', 'Pug');
     spawn('node-sass -w --output-style compressed ./frontend/src/scss/main.scss ./frontend/src/css/main.min.css', 'Sass');
 }
-if (args && args.includes('--open')) {
-    setTimeout(()=>exec('explorer \"http://localhost:80\" || xdg-open \"http://localhost:80\" || open \"http://localhost:80\"'), 2000);
-}
-if (args && args.includes('--with-backend')) {
-    setTimeout(()=>require('../backend/index'), 100);
-}
+if (argsOpen)
+    setTimeout(()=>exec('explorer \"http://localhost:3000\" || xdg-open \"http://localhost:3000\" || open \"http://localhost:3000\"'), 2000);
 
 const express = require('express');
-const app = express();
+const app = withBackend ? require('../backend/index') : express();
 
-app.use(express.static(process.cwd() + '/frontend/src/'));
-app.use('/', express.static(process.cwd() + '/frontend/src/html'));
+app.use(express.static(process.cwd() + '/frontend/' + location));
+app.use('/', express.static(process.cwd() + '/frontend/' + location + 'html'));
 
-app.listen(80);
+if (!withBackend) app.listen(3000);

@@ -223,13 +223,13 @@
 
     /* ----- ENV VARS ----- */
     
-    const backendPort = 3000;
     const cells = $('.sudoku__cell');
     let baseURL = window.location.href;
+    if (baseURL.startsWith('file:///')) baseURL = 'localhost:3000';
     const htIndex = baseURL.indexOf('#');
     baseURL = baseURL.substr(0, htIndex!=-1 ? htIndex : baseURL.length)
     baseURL = baseURL.endsWith('/') ? baseURL.slice(0, -1) : baseURL;
-    baseURL = `${baseURL}:${backendPort}/api`;
+    baseURL = `${baseURL}/api`;
 
     main();
 })();

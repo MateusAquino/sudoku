@@ -34,7 +34,7 @@ Para compilar e executar o Website (frontend) utilize os comandos abaixo:
 ```bash
 yarn install # caso ainda não tenha utilizado
 yarn build
-yarn runf # ou 'yarn host --open' caso queira colocá-lo na porta 80
+yarn runf
 ```
 
 ## 💻 Preview

@@ -19,8 +19,8 @@
 
 @mixin pseudoIcon($name, $color) {
 	&::before {
-    	content: '';
-    	background: url('../../img/' + $name + '.png');
+		content: '';
+    	background: url('../img/' + $name + '.png'), url('../../img/' + $name + '.png');
     	background-size: cover;
     	width: 32px;
 		height: 32px;

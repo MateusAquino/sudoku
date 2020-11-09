@@ -6,8 +6,8 @@
     "devb": "nodemon backend/index.js",
     "runb": "node backend/index.js",
     "test": "jest",
-    "devf": "node frontend/dev.js --auto-compile --open",
-    "runf": "start \"\" \"./frontend/build/index.html\" || xdg-open ./frontend/build/index.html || sensible-browser ./frontend/build/index.html",
+    "devf": "node frontend/dev.js --from-src --auto-compile --open",
+    "runf": "node frontend/dev.js --open",
     "host": "node frontend/dev.js",
     "build": "node frontend/build.js",
     "start": "node frontend/dev.js --with-backend"

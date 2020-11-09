@@ -23,18 +23,26 @@
 </p>
 
 ## 🚀 Instalação
-Configure um cluster no MongoDB e coloque a **string de conexão** em um arquivo `.env` com o nome `databaseuri`.  
-Para instalar as dependências do Servidor (backend), clone o projeto em seu computador e em seguida execute:
+A porta padrão é **3000**. Ao iniciar seu projeto localmente, acesse `localhost:3000`.  
+Clone o projeto em seu computador e em seguida configure um cluster no MongoDB, coloque a **string de conexão** em um arquivo `.env` com o nome `databaseuri`.    
+Por fim, para instalar as dependências e executar o Servidor (backend) separadamente, utilize os comandos abaixo:
 ```bash
 yarn install
 yarn runb
 ```
 
-Para compilar e executar o Website (frontend) utilize os comandos abaixo:
+Para compilar e executar o Website (frontend) separadamente:
 ```bash
 yarn install # caso ainda não tenha utilizado
 yarn build
 yarn runf
+```
+
+Para compilar e executar **ambos** os apps (backend e frontend):
+```bash
+yarn install
+yarn build
+yarn start
 ```
 
 ## 💻 Preview

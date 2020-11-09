@@ -1,7 +1,7 @@
 /* Table w/ cells */
 .sudoku {
     @include desktop() { width: 385px; }
-    @include mobile()  { width: calc(100% - 100px); flex-grow: 1; }
+    @include mobile()  { width: calc(100%); flex-grow: 1; }
 
     td {
         position: relative;
